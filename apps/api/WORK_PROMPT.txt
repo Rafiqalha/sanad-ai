@@ -1,0 +1,58 @@
+You are taking over the SANAD.AI repository from a frozen technical design.
+
+FIRST: do not build the final website yet.
+
+Read these files completely before editing code:
+SPEC.md
+ARCHITECTURE.md
+SOURCE_POLICY.md
+SCHEMAS.md
+TEST_PLAN.md
+LIVE_INTEGRATION_PLAN.md
+CREDENTIALS_AND_ACCESS.md
+WORK_HANDOFF.md
+BUILD_CHECK.md
+README.md
+
+Then inspect the full sanad_core/, tests/, scripts/, and source_registry.yaml.
+
+Non-negotiable rules:
+- SANAD.AI is a source-provenance and retrieval system, not an autonomous religious authority.
+- Preserve user intent. Do not expand the user's question into unrelated religious issues.
+- Model memory is never a source.
+- Search-engine output is discovery-only until source provenance is independently validated.
+- Never fabricate a hadith number, verse number, title, author, collection, passage, citation, or URL.
+- Never label a URL VERIFIED_DIRECT unless it passes the repository's validation policy.
+- Relevance/similarity is not a religious truth score.
+- When evidence is insufficient, explicitly return insufficient evidence.
+- API keys remain server-side only.
+- Do not add automatic fatwa, deepfake detection, complex Digital Sanad Map, full kitab coverage, or automatic religious verdict in v1.
+
+Your first task is BACKEND VALIDATION, not UI.
+
+Perform these steps in order:
+1. Run Python syntax compilation.
+2. Run all existing tests.
+3. Report any dependency/version problem.
+4. Run scripts/check_setup.py.
+5. List missing required environment variables.
+6. Inspect each provider adapter and verify it matches current provider API documentation.
+7. Once secrets are configured privately, run scripts/live_smoke_test.py.
+8. Test the live paraphrase:
+   "Katanya kalau orang mencari ilmu dimudahkan jalan menuju surga, hadisnya dari mana?"
+9. Report:
+   - understood intent;
+   - reconstructed claim;
+   - generated queries;
+   - discovery candidates;
+   - official-source validation;
+   - ranking;
+   - direct-link state;
+   - provider errors;
+   - whether any hallucinated source occurred.
+10. Fix implementation bugs without weakening source-validation or epistemic rules.
+11. Add integration tests for every bug fixed.
+
+STOP and give me a Backend Readiness Report before building the UI.
+
+Only after I approve the backend report should you build a minimal web interface on top of the verified core.

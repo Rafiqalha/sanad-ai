@@ -1,0 +1,25 @@
+# secrets
+.env
+.env.local
+*.key
+*.secret
+
+# python
+.venv/
+__pycache__/
+.pytest_cache/
+*.pyc
+
+# node
+node_modules/
+.next/
+dist/
+
+# os / handoff junk
+.DS_Store
+__MACOSX/
+Thumbs.db
+
+# runtime / local state
+runtime/
+work/

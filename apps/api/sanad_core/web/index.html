@@ -1,0 +1,1956 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="google" content="notranslate" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="SANAD.AI membantu menelusuri sumber dan provenance pengetahuan Islam tanpa membuat keputusan keagamaan."
+    />
+    <meta name="theme-color" content="#0E3B2E" />
+    <title>SANAD.AI — Penelusuran sumber Islam</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --ink: #17241f;
+        --ink-soft: #5d6d65;
+        --forest: #216b52;
+        --forest-strong: #0e3b2e;
+        --forest-soft: #e7f1eb;
+        --sage: #a9c8b5;
+        --paper: #f7f6f0;
+        --surface: #ffffff;
+        --surface-muted: #f5f8f5;
+        --line: #dbe5de;
+        --line-strong: #b8cbbf;
+        --amber: #216b52;
+        --amber-soft: #edf5f0;
+        --danger: #93483f;
+        --danger-soft: #fbefec;
+        --blue: #0e3b2e;
+        --blue-soft: #e1eee7;
+        --shadow: 0 18px 55px rgba(14, 59, 46, 0.08);
+        --shadow-soft: 0 8px 28px rgba(14, 59, 46, 0.055);
+        --radius-xl: 28px;
+        --radius-lg: 20px;
+        --radius-md: 13px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        min-width: 320px;
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        background:
+          radial-gradient(circle at 85% 2%, rgba(169, 200, 181, 0.28), transparent 31rem),
+          linear-gradient(180deg, #ffffff 0%, var(--paper) 38rem);
+        color: var(--ink);
+        font-family: "Avenir Next", Avenir, "Segoe UI", system-ui, -apple-system, sans-serif;
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+      }
+
+      ::selection {
+        background: rgba(169, 200, 181, 0.55);
+        color: var(--forest-strong);
+      }
+
+      button,
+      textarea {
+        font: inherit;
+      }
+
+      button {
+        touch-action: manipulation;
+      }
+
+      .site-header {
+        position: relative;
+        z-index: 10;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+        background: rgba(14, 59, 46, 0.97);
+        backdrop-filter: blur(14px);
+      }
+
+      .header-inner,
+      .page-shell,
+      .site-footer {
+        width: min(100% - 40px, 1120px);
+        margin-inline: auto;
+      }
+
+      .header-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+        min-height: 74px;
+      }
+
+      .brand-lockup {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        min-width: 0;
+      }
+
+      .brand-mark {
+        display: grid;
+        flex: 0 0 auto;
+        width: 40px;
+        height: 40px;
+        place-items: center;
+        border-radius: 13px;
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        background: rgba(255, 255, 255, 0.12);
+        color: #ffffff;
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 1.25rem;
+        font-weight: 700;
+        box-shadow: none;
+      }
+
+      .brand-name {
+        display: block;
+        color: #ffffff;
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: clamp(1.28rem, 2vw, 1.55rem);
+        font-weight: 700;
+        letter-spacing: 0.055em;
+        line-height: 1.1;
+      }
+
+      .tagline {
+        display: block;
+        overflow: hidden;
+        margin-top: 4px;
+        color: var(--sage);
+        font-size: 0.78rem;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .boundary-chip {
+        display: inline-flex;
+        flex: 0 0 auto;
+        align-items: center;
+        gap: 8px;
+        min-height: 36px;
+        padding: 6px 12px;
+        border: 1px solid rgba(255, 255, 255, 0.24);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.08);
+        color: #edf7f1;
+        font-size: 0.78rem;
+        font-weight: 700;
+      }
+
+      .boundary-chip::before {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--sage);
+        content: "";
+      }
+
+      .page-shell {
+        padding-block: clamp(48px, 7vw, 82px) 88px;
+      }
+
+      .intro {
+        max-width: 820px;
+        margin: 0 auto 32px;
+        text-align: center;
+      }
+
+      .eyebrow {
+        margin: 0 0 10px;
+        color: var(--forest);
+        font-size: 0.72rem;
+        font-weight: 800;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+      }
+
+      h1,
+      h2,
+      h3,
+      p {
+        margin-top: 0;
+      }
+
+      h1 {
+        max-width: none;
+        margin-bottom: 14px;
+        color: var(--forest-strong);
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: clamp(2.8rem, 8vw, 5.35rem);
+        font-weight: 600;
+        letter-spacing: -0.055em;
+        line-height: 0.98;
+      }
+
+      .hero-tagline {
+        max-width: 680px;
+        margin: 0 auto;
+        color: var(--ink-soft);
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: clamp(1.05rem, 2.2vw, 1.35rem);
+        line-height: 1.55;
+      }
+
+      .search-panel {
+        position: relative;
+        max-width: 900px;
+        margin-inline: auto;
+        overflow: hidden;
+        border: 1px solid rgba(33, 107, 82, 0.17);
+        border-radius: var(--radius-xl);
+        background: var(--surface);
+        box-shadow: var(--shadow);
+      }
+
+      .search-panel::before {
+        position: absolute;
+        inset: 0 0 auto;
+        height: 3px;
+        background: linear-gradient(90deg, var(--forest-strong), var(--forest), var(--sage));
+        content: "";
+      }
+
+      .search-form {
+        padding: clamp(22px, 4vw, 34px);
+      }
+
+      .field-label {
+        display: block;
+        margin-bottom: 10px;
+        color: var(--forest-strong);
+        font-size: 0.88rem;
+        font-weight: 800;
+        letter-spacing: 0.01em;
+      }
+
+      .question-input {
+        display: block;
+        width: 100%;
+        min-height: 118px;
+        resize: vertical;
+        padding: 18px 19px;
+        border: 1px solid var(--line-strong);
+        border-radius: var(--radius-lg);
+        outline: none;
+        background: #ffffff;
+        color: var(--ink);
+        font-size: clamp(1rem, 2vw, 1.08rem);
+        line-height: 1.65;
+        transition: border-color 160ms ease, box-shadow 160ms ease;
+      }
+
+      .question-input::placeholder {
+        color: #7c8782;
+        opacity: 1;
+      }
+
+      .question-input:focus {
+        border-color: var(--forest);
+        box-shadow: 0 0 0 4px rgba(33, 107, 82, 0.13);
+      }
+
+      .form-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px;
+        margin-top: 18px;
+      }
+
+      .form-note {
+        max-width: 560px;
+        margin: 0;
+        color: var(--ink-soft);
+        font-size: 0.78rem;
+      }
+
+      .search-button {
+        display: inline-flex;
+        flex: 0 0 auto;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        min-height: 48px;
+        padding: 12px 20px;
+        border: 0;
+        border-radius: 999px;
+        background: linear-gradient(135deg, var(--forest-strong), var(--forest));
+        color: #fff;
+        cursor: pointer;
+        font-weight: 800;
+        box-shadow: 0 8px 18px rgba(21, 63, 53, 0.18);
+        transition: background 160ms ease, transform 160ms ease, box-shadow 160ms ease;
+      }
+
+      .search-button:hover {
+        background: var(--forest-strong);
+        box-shadow: 0 10px 24px rgba(21, 63, 53, 0.24);
+        transform: translateY(-1px);
+      }
+
+      .search-button:active {
+        transform: translateY(0);
+      }
+
+      .search-button:focus-visible {
+        outline: 3px solid #d79b4c;
+        outline-offset: 3px;
+      }
+
+      .search-button:disabled {
+        cursor: wait;
+        opacity: 0.68;
+        transform: none;
+      }
+
+      .search-icon {
+        width: 18px;
+        height: 18px;
+        fill: none;
+        stroke: currentColor;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 2;
+      }
+
+      .domain-hints {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 9px;
+        padding: 16px 22px;
+        border-top: 1px solid var(--line);
+        background: var(--surface-muted);
+      }
+
+      .domain-hint {
+        padding: 6px 11px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: #ffffff;
+        color: var(--forest-strong);
+        font-size: 0.74rem;
+        font-weight: 700;
+      }
+
+      .status-region,
+      .results-region {
+        width: min(100%, 1000px);
+        margin-inline: auto;
+        margin-top: 24px;
+      }
+
+      .status-region:empty,
+      .results-region[hidden] {
+        display: none;
+      }
+
+      .loading-card,
+      .state-panel,
+      .result-overview,
+      .evidence-card,
+      .web-card,
+      .provider-errors {
+        border: 1px solid var(--line);
+        border-radius: var(--radius-lg);
+        background: var(--surface);
+        box-shadow: var(--shadow-soft);
+      }
+
+      .loading-card {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        padding: 20px 22px;
+      }
+
+      .loading-spinner {
+        width: 28px;
+        height: 28px;
+        flex: 0 0 auto;
+        border: 3px solid rgba(21, 63, 53, 0.15);
+        border-top-color: var(--forest);
+        border-radius: 50%;
+        animation: spin 800ms linear infinite;
+      }
+
+      .loading-title,
+      .loading-detail {
+        margin: 0;
+      }
+
+      .loading-title {
+        color: var(--forest-strong);
+        font-weight: 800;
+      }
+
+      .loading-detail {
+        color: var(--ink-soft);
+        font-size: 0.8rem;
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      .state-panel {
+        padding: clamp(22px, 4vw, 32px);
+      }
+
+      .state-panel.is-clarification {
+        border-color: #d8c195;
+        background: #fffaf0;
+      }
+
+      .state-panel.is-empty {
+        border-color: #cbd6d9;
+        background: #f7fbfc;
+      }
+
+      .state-panel.is-error {
+        border-color: #e6bdb7;
+        background: var(--danger-soft);
+      }
+
+      .state-kicker {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 12px;
+        color: var(--ink-soft);
+        font-size: 0.72rem;
+        font-weight: 800;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+
+      .state-kicker::before {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: currentColor;
+        content: "";
+      }
+
+      .state-panel h2,
+      .result-overview h2 {
+        margin-bottom: 10px;
+        color: var(--forest-strong);
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: clamp(1.5rem, 3.4vw, 2.15rem);
+        font-weight: 500;
+        line-height: 1.2;
+      }
+
+      .state-panel h2:focus,
+      .result-overview h2:focus {
+        outline: none;
+      }
+
+      .state-message {
+        max-width: 760px;
+        margin-bottom: 20px;
+        color: var(--ink-soft);
+      }
+
+      .retry-button {
+        min-height: 44px;
+        padding: 10px 17px;
+        border: 1px solid var(--forest);
+        border-radius: 999px;
+        background: transparent;
+        color: var(--forest);
+        cursor: pointer;
+        font-weight: 800;
+      }
+
+      .retry-button:focus-visible {
+        outline: 3px solid rgba(21, 63, 53, 0.2);
+        outline-offset: 3px;
+      }
+
+      .result-overview {
+        overflow: hidden;
+        border-color: rgba(33, 107, 82, 0.18);
+        background: linear-gradient(145deg, #ffffff, #f7fbf8);
+      }
+
+      .overview-heading {
+        padding: clamp(24px, 4vw, 34px);
+        border-bottom: 1px solid var(--line);
+      }
+
+      .overview-heading .eyebrow {
+        margin-bottom: 8px;
+      }
+
+      .overview-heading h2 {
+        max-width: 720px;
+        margin-bottom: 14px;
+      }
+
+      .overview-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .meta-chip,
+      .evidence-badge,
+      .relation-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        border-radius: 999px;
+        font-size: 0.72rem;
+        font-weight: 800;
+        line-height: 1.2;
+      }
+
+      .meta-chip {
+        padding: 7px 10px;
+        border: 1px solid var(--line);
+        background: var(--surface-muted);
+        color: var(--ink-soft);
+      }
+
+      .summary-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .summary-item {
+        min-width: 0;
+        padding: 22px clamp(22px, 4vw, 32px);
+      }
+
+      .summary-item + .summary-item {
+        border-left: 1px solid var(--line);
+      }
+
+      .summary-item:nth-child(odd) {
+        border-left: 0;
+      }
+
+      .summary-item:nth-child(n + 3) {
+        border-top: 1px solid var(--line);
+      }
+
+      .summary-label {
+        display: block;
+        margin-bottom: 7px;
+        color: var(--forest);
+        font-size: 0.68rem;
+        font-weight: 800;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+
+      .summary-copy {
+        margin: 0;
+        overflow-wrap: anywhere;
+        color: var(--ink);
+        font-size: 0.9rem;
+      }
+
+      .evidence-section {
+        margin-top: 36px;
+      }
+
+      .section-heading {
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        gap: 18px;
+        margin-bottom: 12px;
+      }
+
+      .section-heading h2,
+      .section-heading h3 {
+        margin-bottom: 0;
+        color: var(--forest-strong);
+        font-family: Georgia, "Times New Roman", serif;
+        font-weight: 500;
+      }
+
+      .section-heading h2 {
+        font-size: clamp(1.4rem, 3vw, 1.85rem);
+      }
+
+      .section-note {
+        margin: 0;
+        color: var(--ink-soft);
+        font-size: 0.76rem;
+      }
+
+      .evidence-card {
+        overflow: hidden;
+      }
+
+      .web-results-list {
+        display: grid;
+        gap: 18px;
+      }
+
+      .web-card {
+        position: relative;
+        overflow: hidden;
+        padding: clamp(20px, 4vw, 28px);
+        border-color: rgba(33, 107, 82, 0.15);
+      }
+
+      .web-card::before {
+        position: absolute;
+        inset: 0 auto 0 0;
+        width: 3px;
+        background: var(--sage);
+        content: "";
+      }
+
+      .web-card.is-academic::before {
+        background: var(--forest);
+      }
+
+      .web-card.is-encyclopedic::before {
+        background: #739984;
+      }
+
+      .web-card.is-discovery::before {
+        background: #b68a52;
+      }
+
+      .web-card .book-title {
+        font-size: clamp(1.18rem, 2.7vw, 1.48rem);
+      }
+
+      .web-excerpt {
+        margin: 18px 0 0;
+        color: var(--ink-soft);
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 0.94rem;
+        line-height: 1.75;
+      }
+
+      .web-notice {
+        margin: 18px 0 0;
+        padding: 12px 14px;
+        border-left: 3px solid var(--forest);
+        background: var(--amber-soft);
+        color: var(--forest-strong);
+        font-size: 0.8rem;
+      }
+
+      .web-card .evidence-foot {
+        margin: 20px -28px -28px;
+      }
+
+      .evidence-card + .evidence-card {
+        margin-top: 14px;
+      }
+
+      .evidence-card.is-primary {
+        border-color: rgba(21, 63, 53, 0.28);
+        box-shadow: 0 16px 40px rgba(24, 40, 35, 0.08);
+      }
+
+      .evidence-head {
+        padding: clamp(22px, 4vw, 30px);
+        border-bottom: 1px solid var(--line);
+      }
+
+      .card-topline {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 18px;
+        margin-bottom: 16px;
+      }
+
+      .rank-label {
+        margin: 0 0 7px;
+        color: var(--amber);
+        font-size: 0.7rem;
+        font-weight: 800;
+        letter-spacing: 0.11em;
+        text-transform: uppercase;
+      }
+
+      .book-title {
+        margin: 0;
+        overflow-wrap: anywhere;
+        color: var(--forest-strong);
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: clamp(1.35rem, 3vw, 1.8rem);
+        font-weight: 500;
+        line-height: 1.25;
+      }
+
+      .evidence-badge {
+        flex: 0 0 auto;
+        padding: 8px 11px;
+        border: 1px solid currentColor;
+      }
+
+      .evidence-badge::before {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: currentColor;
+        content: "";
+      }
+
+      .badge-provider {
+        background: var(--forest-soft);
+        color: var(--forest);
+      }
+
+      .badge-discovery {
+        background: var(--amber-soft);
+        color: #8b581d;
+      }
+
+      .badge-direct {
+        background: var(--blue-soft);
+        color: var(--blue);
+      }
+
+      .badge-unverified {
+        background: #f0f1ef;
+        color: #5d6762;
+      }
+
+      .metadata-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 18px 24px;
+        margin: 0;
+      }
+
+      .metadata-grid div {
+        min-width: 0;
+      }
+
+      .metadata-grid dt {
+        margin-bottom: 3px;
+        color: var(--ink-soft);
+        font-size: 0.67rem;
+        font-weight: 800;
+        letter-spacing: 0.07em;
+        text-transform: uppercase;
+      }
+
+      .metadata-grid dd {
+        margin: 0;
+        overflow-wrap: anywhere;
+        color: var(--ink);
+        font-size: 0.85rem;
+        font-weight: 700;
+      }
+
+      .relation-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 18px;
+      }
+
+      .relation-badge {
+        padding: 6px 9px;
+        background: var(--surface-muted);
+        color: var(--ink-soft);
+      }
+
+      .provider-note {
+        margin: 18px 0 0;
+        padding: 13px 15px;
+        border-left: 3px solid var(--forest);
+        border-radius: 0 var(--radius-md) var(--radius-md) 0;
+        background: var(--forest-soft);
+        color: var(--forest-strong);
+        font-size: 0.82rem;
+      }
+
+      .provenance-details {
+        margin: 0 clamp(22px, 4vw, 30px) clamp(22px, 4vw, 30px);
+        padding: 13px 15px;
+        border: 1px solid var(--line);
+        border-radius: var(--radius-md);
+        background: var(--surface-muted);
+        color: var(--ink-soft);
+        font-size: 0.8rem;
+      }
+
+      .provenance-details summary {
+        cursor: pointer;
+        color: var(--forest-strong);
+        font-weight: 800;
+      }
+
+      .provenance-details p {
+        margin: 12px 0 0;
+        white-space: pre-wrap;
+      }
+
+      .evidence-texts {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .text-block {
+        min-width: 0;
+        padding: clamp(22px, 4vw, 30px);
+      }
+
+      .text-block + .text-block {
+        border-left: 1px solid var(--line);
+      }
+
+      .text-label {
+        display: block;
+        margin-bottom: 12px;
+        color: var(--ink-soft);
+        font-size: 0.68rem;
+        font-weight: 800;
+        letter-spacing: 0.09em;
+        text-transform: uppercase;
+      }
+
+      .hadith-text {
+        margin: 0;
+        overflow-wrap: anywhere;
+        color: var(--ink);
+        white-space: pre-wrap;
+      }
+
+      .hadith-text.is-arabic {
+        font-family: "Noto Naskh Arabic", Amiri, "Geeza Pro", Georgia, serif;
+        font-size: clamp(1.65rem, 3.4vw, 2.05rem);
+        font-feature-settings: "kern" 1, "liga" 1;
+        line-height: 2.2;
+        text-align: right;
+      }
+
+      .hadith-text.is-english {
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 0.96rem;
+        line-height: 1.75;
+      }
+
+      .evidence-foot {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px;
+        padding: 16px clamp(22px, 4vw, 30px);
+        border-top: 1px solid var(--line);
+        background: var(--surface-muted);
+      }
+
+      .canonical-note {
+        margin: 0;
+        color: var(--ink-soft);
+        font-size: 0.76rem;
+      }
+
+      .direct-link {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 44px;
+        padding: 10px 16px;
+        border-radius: 999px;
+        background: var(--forest);
+        color: #fff;
+        font-size: 0.8rem;
+        font-weight: 800;
+        text-decoration: none;
+        transition: background 160ms ease, transform 160ms ease, box-shadow 160ms ease;
+      }
+
+      .direct-link:hover {
+        background: var(--forest-strong);
+        box-shadow: 0 8px 20px rgba(14, 59, 46, 0.18);
+        transform: translateY(-1px);
+      }
+
+      .direct-link:focus-visible {
+        outline: 3px solid rgba(21, 63, 53, 0.24);
+        outline-offset: 3px;
+      }
+
+      .alternatives {
+        margin-top: 20px;
+      }
+
+      .alternatives > summary {
+        min-height: 48px;
+        padding: 12px 17px;
+        border: 1px solid var(--line-strong);
+        border-radius: var(--radius-md);
+        background: rgba(255, 253, 248, 0.75);
+        color: var(--forest-strong);
+        cursor: pointer;
+        font-weight: 800;
+        list-style-position: inside;
+      }
+
+      .alternatives > summary:focus-visible {
+        outline: 3px solid rgba(21, 63, 53, 0.16);
+        outline-offset: 3px;
+      }
+
+      .alternatives-list {
+        margin-top: 14px;
+      }
+
+      .provider-errors {
+        margin-top: 20px;
+        padding: 18px 20px;
+        border-color: var(--line-strong);
+        background: var(--surface-muted);
+      }
+
+      .provider-errors summary {
+        cursor: pointer;
+        color: var(--forest-strong);
+        font-size: 0.9rem;
+        font-weight: 800;
+      }
+
+      .provider-errors ul {
+        margin: 0;
+        padding-left: 20px;
+        margin-top: 10px;
+        color: var(--ink-soft);
+        font-size: 0.78rem;
+      }
+
+      .expert-note {
+        margin: 22px 0 0;
+        color: var(--ink-soft);
+        font-size: 0.78rem;
+        text-align: center;
+      }
+
+      .site-footer {
+        display: flex;
+        justify-content: space-between;
+        gap: 24px;
+        padding-block: 24px 36px;
+        border-top: 1px solid rgba(24, 40, 35, 0.1);
+        color: var(--ink-soft);
+        font-size: 0.76rem;
+      }
+
+      .site-footer p {
+        margin: 0;
+      }
+
+      @media (max-width: 720px) {
+        .header-inner,
+        .page-shell,
+        .site-footer {
+          width: min(100% - 28px, 980px);
+        }
+
+        .header-inner {
+          min-height: 78px;
+        }
+
+        .tagline {
+          max-width: min(60vw, 360px);
+        }
+
+        .boundary-chip {
+          display: none;
+        }
+
+        .intro {
+          margin-bottom: 26px;
+        }
+
+        h1 {
+          font-size: clamp(2.75rem, 15vw, 4.15rem);
+        }
+
+        .form-row {
+          align-items: stretch;
+          flex-direction: column;
+        }
+
+        .search-button {
+          width: 100%;
+        }
+
+        .domain-hints {
+          padding-inline: 16px;
+        }
+
+        .summary-grid,
+        .evidence-texts {
+          grid-template-columns: 1fr;
+        }
+
+        .summary-item + .summary-item,
+        .text-block + .text-block {
+          border-top: 1px solid var(--line);
+          border-left: 0;
+        }
+
+        .card-topline,
+        .evidence-foot {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+
+        .section-heading {
+          align-items: flex-start;
+          flex-direction: column;
+          gap: 4px;
+        }
+
+        .web-card .evidence-foot {
+          margin: 18px -20px -20px;
+        }
+
+        .site-footer {
+          flex-direction: column;
+        }
+      }
+
+      @media (max-width: 420px) {
+        .tagline {
+          white-space: normal;
+        }
+
+        .brand-mark {
+          width: 39px;
+          height: 39px;
+        }
+
+        .page-shell {
+          padding-top: 34px;
+        }
+
+        .search-form {
+          padding: 19px;
+        }
+
+        .metadata-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .domain-hint {
+          font-size: 0.7rem;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          scroll-behavior: auto !important;
+          transition-duration: 0.01ms !important;
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="header-inner">
+        <div class="brand-lockup" aria-label="SANAD.AI">
+          <span class="brand-mark" aria-hidden="true">S</span>
+          <span>
+            <span class="brand-name">SANAD.AI</span>
+          </span>
+        </div>
+        <span class="boundary-chip">Penelusuran sumber</span>
+      </div>
+    </header>
+
+    <main class="page-shell">
+      <section class="intro" aria-labelledby="page-title">
+        <h1 id="page-title">SANAD.AI</h1>
+        <p class="hero-tagline">Memahami maksud, menelusuri sumber, memperkuat tabayyun.</p>
+      </section>
+
+      <section class="search-panel" aria-label="Penelusuran sumber">
+        <form class="search-form" id="search-form" novalidate>
+          <label class="field-label" for="question">Apa yang ingin Anda telusuri?</label>
+          <textarea
+            class="question-input"
+            id="question"
+            name="question"
+            rows="4"
+            required
+            maxlength="1200"
+            aria-describedby="question-note"
+            placeholder="Katanya kalau orang mencari ilmu dimudahkan jalan menuju surga, hadisnya dari mana?"
+          ></textarea>
+          <div class="form-row">
+            <p class="form-note" id="question-note">
+              Telusuri hadis, ayat Al-Qur’an, sejarah Islam, dan kajian akademik dari sumber yang dapat diperiksa.
+            </p>
+            <button class="search-button" id="search-button" type="submit">
+              <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <circle cx="11" cy="11" r="7"></circle>
+                <path d="m20 20-4-4"></path>
+              </svg>
+              <span>Telusuri Sumber</span>
+            </button>
+          </div>
+        </form>
+        <div class="domain-hints" aria-label="Jenis sumber yang dapat ditelusuri">
+          <span class="domain-hint">Hadis</span>
+          <span class="domain-hint">Al-Qur’an</span>
+          <span class="domain-hint">Sejarah Islam</span>
+          <span class="domain-hint">Kajian akademik</span>
+        </div>
+      </section>
+
+      <div class="status-region" id="status-region" role="status" aria-live="polite"></div>
+      <section class="results-region" id="results-region" aria-live="polite" hidden></section>
+    </main>
+
+    <footer class="site-footer">
+      <p>SANAD.AI v2 · Penelusuran dan asal-usul sumber pengetahuan Islam.</p>
+      <p>Membantu tabayyun sumber, bukan membuat fatwa atau skor kebenaran agama.</p>
+    </footer>
+
+    <script>
+      (() => {
+        "use strict";
+
+        const form = document.querySelector("#search-form");
+        const questionInput = document.querySelector("#question");
+        const searchButton = document.querySelector("#search-button");
+        const statusRegion = document.querySelector("#status-region");
+        const resultsRegion = document.querySelector("#results-region");
+
+        const evidenceLabels = {
+          VERIFIED_PROVIDER: "Terverifikasi pada provider",
+          VERIFIED_DIRECT: "Sumber terverifikasi",
+          DISCOVERY_ONLY: "Hasil penelusuran web",
+          BROKEN: "Tautan sumber tidak dapat diakses",
+          UNVERIFIED: "Status tautan belum terverifikasi",
+        };
+
+        const domainLabels = {
+          HADITH: "Hadis",
+          QURAN: "Al-Qur’an",
+          ISLAMIC_HISTORY: "Sejarah Islam",
+          ACADEMIC_ISLAMIC_STUDIES: "Kajian akademik Islam",
+          GENERAL_ISLAMIC: "Sumber keislaman",
+          UNKNOWN: "Belum dikenali",
+        };
+
+        const sourceClassLabels = {
+          PRIMARY_RELIGIOUS_SOURCE: "Sumber agama primer",
+          OFFICIAL_GOVERNMENT: "Lembaga pemerintah",
+          ACADEMIC: "Sumber akademik",
+          ENCYCLOPEDIC: "Sumber ensiklopedis",
+          INSTITUTIONAL: "Sumber institusional",
+          PUBLISHER: "Penerbit",
+          GENERAL_WEB: "Web umum",
+          COMMUNITY: "Komunitas",
+          UNKNOWN: "Klasifikasi belum tersedia",
+        };
+
+        const systemStatusLabels = {
+          SUCCESS: "Sumber ditemukan",
+          PARTIAL_PROVIDER_FAILURE: "Sebagian sumber tersedia",
+          SOURCE_FOUND_LINK_UNVERIFIED: "Kandidat sumber ditemukan",
+          NO_RELIABLE_SOURCE_FOUND: "Belum dapat diverifikasi",
+          NEEDS_CLARIFICATION: "Perlu klarifikasi",
+          SYSTEM_ERROR: "Penelusuran terkendala",
+        };
+
+        const relationshipLabels = {
+          DIRECT_MATCH: "Kecocokan langsung",
+          STRONG_RELATED_MATCH: "Kecocokan kuat",
+          PARTIAL_MATCH: "Kecocokan sebagian",
+          ATTRIBUTION_MISMATCH: "Atribusi berbeda",
+          INSUFFICIENT_EVIDENCE: "Bukti sumber belum cukup",
+        };
+
+        function createElement(tag, className, text) {
+          const node = document.createElement(tag);
+          if (className) node.className = className;
+          if (text !== undefined && text !== null) node.textContent = String(text);
+          return node;
+        }
+
+        function valueOrFallback(value, fallback = "Tidak tersedia") {
+          return value === undefined || value === null || value === "" ? fallback : value;
+        }
+
+        function friendlyDomain(value) {
+          return domainLabels[value] || "Sumber keislaman";
+        }
+
+        function friendlySourceClass(value) {
+          return sourceClassLabels[value] || sourceClassLabels.UNKNOWN;
+        }
+
+        function friendlyProviderError(value) {
+          const error = String(value || "").toLowerCase();
+          if (error.includes("invalid_scope")) {
+            return "Akses pencarian provider Al-Qur’an belum tersedia pada kredensial saat ini.";
+          }
+          if (error.includes("403")) {
+            return "Salah satu halaman tidak mengizinkan pemeriksaan otomatis.";
+          }
+          if (error.includes("gaierror") || error.includes("requesterror")) {
+            return "Salah satu sumber web tidak dapat dihubungi.";
+          }
+          if (error.includes("not configured") || error.includes("credentials")) {
+            return "Salah satu provider sumber belum dikonfigurasi.";
+          }
+          return "Sebagian sumber belum dapat diperiksa pada penelusuran ini.";
+        }
+
+        function evidenceBadge(state) {
+          const style = {
+            VERIFIED_PROVIDER: "badge-provider",
+            VERIFIED_DIRECT: "badge-direct",
+            DISCOVERY_ONLY: "badge-discovery",
+          }[state] || "badge-unverified";
+          return createElement(
+            "span",
+            `evidence-badge ${style}`,
+            evidenceLabels[state] || "Status belum tersedia",
+          );
+        }
+
+        function safeDirectUrl(value) {
+          if (!value) return null;
+          try {
+            const url = new URL(value, window.location.origin);
+            return url.protocol === "https:" ? url.href : null;
+          } catch (_error) {
+            return null;
+          }
+        }
+
+        function sourceDomain(value) {
+          const safeUrl = safeDirectUrl(value);
+          if (!safeUrl) return null;
+          try {
+            return new URL(safeUrl).hostname.replace(/^www\./, "");
+          } catch (_error) {
+            return null;
+          }
+        }
+
+        function conciseSourceSummary(value, limit = 620) {
+          const copy = String(value || "").replace(/\s+/g, " ").trim();
+          if (!copy) return null;
+          return copy.length > limit ? `${copy.slice(0, limit).trimEnd()}…` : copy;
+        }
+
+        function formatValidationDate(value) {
+          if (!value) return null;
+          const date = new Date(value);
+          if (Number.isNaN(date.getTime())) return null;
+          return new Intl.DateTimeFormat("id-ID", {
+            dateStyle: "medium",
+            timeStyle: "short",
+          }).format(date);
+        }
+
+        function setLoading(isLoading) {
+          form.setAttribute("aria-busy", String(isLoading));
+          resultsRegion.setAttribute("aria-busy", String(isLoading));
+          questionInput.disabled = isLoading;
+          searchButton.disabled = isLoading;
+          const label = searchButton.querySelector("span");
+          label.textContent = isLoading ? "Menelusuri…" : "Telusuri Sumber";
+
+          statusRegion.replaceChildren();
+          if (!isLoading) return;
+
+          const card = createElement("div", "loading-card");
+          card.append(createElement("span", "loading-spinner"));
+          const copy = createElement("div");
+          copy.append(
+            createElement("p", "loading-title", "Sedang menelusuri sumber…"),
+            createElement(
+              "p",
+              "loading-detail",
+              "Merekonstruksi maksud, mencari kandidat, dan memeriksa provenance provider.",
+            ),
+          );
+          card.append(copy);
+          statusRegion.append(card);
+        }
+
+        function addMetaChip(container, text) {
+          if (text) container.append(createElement("span", "meta-chip", text));
+        }
+
+        function addMetadata(container, label, value) {
+          const wrapper = createElement("div");
+          wrapper.append(
+            createElement("dt", "", label),
+            createElement("dd", "", valueOrFallback(value)),
+          );
+          container.append(wrapper);
+        }
+
+        function addMetadataIfPresent(container, label, value) {
+          if (value === undefined || value === null || value === "") return;
+          addMetadata(container, label, value);
+        }
+
+        function addTextBlock(container, label, text, language) {
+          if (!text) return;
+          const block = createElement("section", "text-block");
+          block.append(createElement("span", "text-label", label));
+          const textNode = createElement(
+            "p",
+            `hadith-text ${language === "ar" ? "is-arabic" : "is-english"}`,
+            text,
+          );
+          textNode.lang = language;
+          if (language === "ar") {
+            textNode.dir = "rtl";
+            textNode.setAttribute("translate", "no");
+          }
+          block.append(textNode);
+          container.append(block);
+        }
+
+        function addEnglishProvenance(card, text) {
+          if (!text) return;
+          const details = createElement("details", "provenance-details");
+          details.append(
+            createElement("summary", "", "Lihat teks Inggris provider (provenance)"),
+          );
+          const copy = createElement("p", "", text);
+          copy.lang = "en";
+          details.append(copy);
+          card.append(details);
+        }
+
+        function renderEvidenceCard(item, index, isPrimary) {
+          const candidate = item?.candidate || {};
+          const raw = candidate.raw || {};
+          const link = item?.link || {};
+          const texts = candidate.retrieved_texts || {};
+          const isQuran = candidate.provider_id === "quran_foundation";
+          const card = createElement(
+            "article",
+            `evidence-card${isPrimary ? " is-primary" : ""}`,
+          );
+
+          const head = createElement("div", "evidence-head");
+          const topline = createElement("div", "card-topline");
+          const titleGroup = createElement("div");
+          titleGroup.append(
+            createElement(
+              "p",
+              "rank-label",
+              isPrimary ? "Kandidat teratas" : `Kandidat alternatif ${index}`,
+            ),
+            createElement(
+              "h3",
+              "book-title",
+              valueOrFallback(
+                isQuran
+                  ? `Surah ${candidate.surah_name || candidate.collection || ""}`.trim()
+                  : raw.book_name || candidate.title || candidate.collection,
+              ),
+            ),
+          );
+          topline.append(titleGroup, evidenceBadge(link.state));
+          head.append(topline);
+
+          const metadata = createElement("dl", "metadata-grid");
+          if (isQuran) {
+            addMetadata(metadata, "Nama surah", candidate.surah_name || candidate.collection);
+            addMetadata(metadata, "Nomor surah", candidate.surah_number);
+            addMetadata(metadata, "Nomor ayat", candidate.verse_number);
+            addMetadata(metadata, "Verse key", candidate.verse_key);
+            addMetadata(metadata, "Provider", candidate.provider_name);
+            addMetadata(metadata, "Terjemahan provider", candidate.translation_name);
+          } else {
+            addMetadata(metadata, "Kitab", candidate.collection);
+            addMetadata(metadata, "Nomor hadis", candidate.item_number);
+            addMetadata(metadata, "Provider", candidate.provider_name);
+            addMetadata(metadata, "Grade/status provider", raw.status);
+          }
+          addMetadata(
+            metadata,
+            "Klasifikasi sumber",
+            friendlySourceClass(
+              candidate.source_class ||
+                (isQuran ? "PRIMARY_RELIGIOUS_SOURCE" : "INSTITUTIONAL"),
+            ),
+          );
+          addMetadata(metadata, "Status sumber", evidenceLabels[link.state]);
+          addMetadataIfPresent(
+            metadata,
+            link.state === "VERIFIED_DIRECT"
+              ? "Tautan diperiksa"
+              : link.state === "VERIFIED_PROVIDER"
+                ? "Metadata provider divalidasi"
+                : "Status diperbarui",
+            formatValidationDate(link.link_validated_at),
+          );
+          head.append(metadata);
+
+          const relationRow = createElement("div", "relation-row");
+          relationRow.append(
+            createElement(
+              "span",
+              "relation-badge",
+              relationshipLabels[item?.relationship] || "Kandidat terkait",
+            ),
+          );
+          if (candidate.chapter) {
+            relationRow.append(createElement("span", "relation-badge", candidate.chapter));
+          }
+          head.append(relationRow);
+
+          if (candidate.provider_id === "hadithapi") {
+            head.append(
+              createElement(
+                "p",
+                "provider-note",
+                "Sumber telah dicocokkan pada provider hadis terstruktur. Validasi Tier-1 Sunnah.com masih menunggu akses resmi.",
+              ),
+            );
+          }
+          if (isQuran) {
+            head.append(
+              createElement(
+                "p",
+                "provider-note",
+                texts.id
+                  ? "Teks Arab dan terjemahan Bahasa Indonesia diambil dari resource resmi Quran Foundation. Tampilan ini tidak menambahkan tafsir otomatis."
+                  : "Teks Arab berasal dari Quran Foundation. Terjemahan Bahasa Indonesia resmi provider belum tersedia, sehingga sistem tidak membuat terjemahan sendiri.",
+              ),
+            );
+          }
+
+          card.append(head);
+
+          const textContainer = createElement("div", "evidence-texts");
+          addTextBlock(textContainer, "Teks Arab", texts.ar, "ar");
+          if (texts.id) {
+            addTextBlock(textContainer, "Terjemahan Bahasa Indonesia", texts.id, "id");
+          } else if (!isQuran) {
+            const unavailable = createElement("section", "text-block");
+            unavailable.append(
+              createElement("span", "text-label", "Terjemahan Bahasa Indonesia"),
+              createElement(
+                "p",
+                "hadith-text is-english",
+                "Belum tersedia dari provider hadis. Sistem tidak membuat terjemahan sendiri.",
+              ),
+            );
+            textContainer.append(unavailable);
+          }
+          if (textContainer.childElementCount > 0) card.append(textContainer);
+          addEnglishProvenance(
+            card,
+            texts.en || (candidate.language === "en" ? candidate.retrieved_text : null),
+          );
+
+          const foot = createElement("div", "evidence-foot");
+          const isDirect =
+            link.state === "VERIFIED_DIRECT" &&
+            link.http_status === 200 &&
+            link.provider_domain_match === true &&
+            Boolean(link.link_validated_at) &&
+            (candidate.official_api_validated === true ||
+              candidate.canonical_provider_validated === true);
+          const directUrl = safeDirectUrl(
+            link.source_url || link.final_url || candidate.source_url,
+          );
+          if (isDirect && directUrl) {
+            const directLink = createElement("a", "direct-link", "Buka sumber asli");
+            directLink.href = directUrl;
+            directLink.target = "_blank";
+            directLink.rel = "noopener noreferrer";
+            foot.append(directLink);
+          } else if (
+            safeDirectUrl(raw.public_source_url) &&
+            raw.public_source_http_status === 200 &&
+            Boolean(raw.public_source_link_validated_at)
+          ) {
+            const relatedLink = createElement(
+              "a",
+              "direct-link",
+              "Buka halaman sumber terkait",
+            );
+            relatedLink.href = safeDirectUrl(raw.public_source_url);
+            relatedLink.target = "_blank";
+            relatedLink.rel = "noopener noreferrer";
+            foot.append(
+              createElement(
+                "p",
+                "canonical-note",
+                "Halaman publik ini ditemukan dan diperiksa melalui penelusuran web; status provider tetap tidak berubah.",
+              ),
+              relatedLink,
+            );
+          } else {
+            foot.append(
+              createElement(
+                "p",
+                "canonical-note",
+                link.state === "DISCOVERY_ONLY"
+                  ? "Kandidat ini belum melewati validasi sumber primer."
+                  : "Data terverifikasi pada provider, tetapi tautan publik langsung belum tersedia.",
+              ),
+            );
+          }
+          card.append(foot);
+          return card;
+        }
+
+        function renderWebSourceCard(source, index) {
+          const sourceClass = source?.source_class || source?.provenance || "UNKNOWN";
+          const sourceState = source?.evidence_state || source?.link_state || "UNVERIFIED";
+          const cardStyle =
+            sourceClass === "ACADEMIC"
+              ? "is-academic"
+              : sourceClass === "ENCYCLOPEDIC"
+                ? "is-encyclopedic"
+                : "is-discovery";
+          const card = createElement("article", `web-card ${cardStyle}`);
+
+          const sourceTitle = source?.page_title || source?.title;
+          const author = Array.isArray(source?.authors)
+            ? source.authors.filter(Boolean).join(", ")
+            : source?.author;
+          const summary = conciseSourceSummary(
+            source?.content_excerpt || source?.summary || source?.content,
+          );
+          const publicUrl =
+            source?.resolved_url || source?.canonical_url || source?.source_url;
+          const provider =
+            source?.provider ||
+            (Array.isArray(source?.provider_ids) ? source.provider_ids.join(" + ") : null) ||
+            source?.link_provider;
+          const rankLabel =
+            sourceClass === "ACADEMIC"
+              ? `Rujukan akademik ${index}`
+              : sourceClass === "ENCYCLOPEDIC"
+                ? `Rujukan ensiklopedis ${index}`
+                : `Hasil penelusuran ${index}`;
+
+          const topline = createElement("div", "card-topline");
+          const titleGroup = createElement("div");
+          titleGroup.append(
+            createElement("p", "rank-label", rankLabel),
+            createElement(
+              "h3",
+              "book-title",
+              valueOrFallback(sourceTitle, "Sumber ditemukan"),
+            ),
+          );
+          topline.append(titleGroup, evidenceBadge(sourceState));
+          card.append(topline);
+
+          const metadata = createElement("dl", "metadata-grid");
+          addMetadataIfPresent(metadata, "Provider", provider);
+          addMetadataIfPresent(
+            metadata,
+            "Domain",
+            source?.source_domain || sourceDomain(publicUrl),
+          );
+          addMetadataIfPresent(
+            metadata,
+            "Institusi/penerbit",
+            source?.institution || source?.publisher,
+          );
+          addMetadataIfPresent(metadata, "Penulis", author);
+          addMetadataIfPresent(
+            metadata,
+            "Tahun/tanggal",
+            source?.year || source?.publication_date,
+          );
+          addMetadataIfPresent(metadata, "Jurnal/sumber", source?.journal);
+          addMetadataIfPresent(metadata, "DOI", source?.doi);
+          addMetadataIfPresent(metadata, "Bahasa", source?.language);
+          addMetadataIfPresent(
+            metadata,
+            "Akses terbuka",
+            source?.open_access === true || source?.is_open_access === true
+              ? "Ya"
+              : source?.open_access === false || source?.is_open_access === false
+                ? "Tidak"
+                : source?.oa_status,
+          );
+          addMetadata(
+            metadata,
+            "Klasifikasi sumber",
+            friendlySourceClass(sourceClass),
+          );
+          addMetadata(
+            metadata,
+            "Status sumber",
+            evidenceLabels[sourceState] || "Status belum tersedia",
+          );
+          addMetadataIfPresent(
+            metadata,
+            "Metadata diambil",
+            formatValidationDate(source?.retrieved_at || source?.validation_timestamp),
+          );
+          addMetadataIfPresent(
+            metadata,
+            "Tautan diperiksa",
+            formatValidationDate(source?.link_validated_at),
+          );
+          card.append(metadata);
+
+          if (summary) {
+            card.append(createElement("p", "web-excerpt", summary));
+          }
+          const notice =
+            sourceClass === "ACADEMIC"
+              ? "Sumber akademik ini digunakan untuk konteks dan penelusuran ilmiah, bukan sebagai penentu otoritas agama."
+              : sourceClass === "ENCYCLOPEDIC"
+                ? "Sumber ensiklopedis sekunder untuk orientasi sejarah; rujukan akademik tetap ditampilkan terpisah."
+                : "Ditemukan melalui penelusuran web — Kandidat hasil penelusuran, belum menjadi sumber primer terverifikasi.";
+          card.append(createElement("p", "web-notice", notice));
+
+          const finalUrl = safeDirectUrl(publicUrl);
+          const providerValidated =
+            ["VERIFIED_DIRECT", "VERIFIED_PROVIDER"].includes(sourceState) &&
+            Boolean(source?.provider || source?.link_provider);
+          const discoveredPageValidated =
+            sourceState === "DISCOVERY_ONLY" &&
+            source?.http_status === 200 &&
+            Boolean(source?.link_validated_at);
+          const foot = createElement("div", "evidence-foot");
+          if (finalUrl && (providerValidated || discoveredPageValidated)) {
+            const linkLabel =
+              sourceClass === "ACADEMIC"
+                ? sourceState === "VERIFIED_DIRECT"
+                  ? "Buka publikasi"
+                  : "Buka metadata publikasi"
+                : sourceClass === "ENCYCLOPEDIC"
+                  ? "Buka artikel"
+                  : "Buka halaman ditemukan";
+            const link = createElement("a", "direct-link", linkLabel);
+            link.href = finalUrl;
+            link.target = "_blank";
+            link.rel = "noopener noreferrer";
+            foot.append(link);
+          } else {
+            foot.append(
+              createElement(
+                "p",
+                "canonical-note",
+                finalUrl
+                  ? "Tautan publik tersedia, tetapi belum lolos pemeriksaan untuk ditampilkan."
+                  : "Tautan publik langsung belum tersedia.",
+              ),
+            );
+          }
+          card.append(foot);
+          return card;
+        }
+
+        function renderProviderErrors(errors) {
+          if (!Array.isArray(errors) || errors.length === 0) return null;
+          const panel = createElement("details", "provider-errors");
+          panel.append(createElement("summary", "", "Ada sumber yang belum dapat diperiksa"));
+          const list = createElement("ul");
+          [...new Set(errors.map(friendlyProviderError))].forEach((error) =>
+            list.append(createElement("li", "", error)),
+          );
+          panel.append(list);
+          return panel;
+        }
+
+        function appendContextSummary(container, data, elapsedMs) {
+          const heading = createElement("div", "overview-heading");
+          heading.append(createElement("p", "eyebrow", "Hasil penelusuran"));
+          const title = createElement(
+            "h2",
+            "",
+            "Sumber yang paling dekat dengan maksud Anda",
+          );
+          title.tabIndex = -1;
+          heading.append(title);
+          const metadata = createElement("div", "overview-meta");
+          addMetaChip(metadata, friendlyDomain(data.domain));
+          addMetaChip(
+            metadata,
+            `Selesai dalam ${Number(data.response_time_ms ?? elapsedMs).toFixed(0)} ms`,
+          );
+          addMetaChip(
+            metadata,
+            systemStatusLabels[data.status] || "Hasil tersedia",
+          );
+          heading.append(metadata);
+          container.append(heading);
+
+          const grid = createElement("div", "summary-grid");
+          if (data.raw_user_input) {
+            const question = createElement("div", "summary-item");
+            question.append(
+              createElement("span", "summary-label", "Pertanyaan pengguna"),
+              createElement("p", "summary-copy", data.raw_user_input),
+            );
+            grid.append(question);
+          }
+          const intent = createElement("div", "summary-item");
+          intent.append(
+            createElement("span", "summary-label", "Maksud yang dipahami"),
+            createElement("p", "summary-copy", valueOrFallback(data.understood_intent)),
+          );
+          grid.append(intent);
+          if (data.reconstructed_claim) {
+            const claim = createElement("div", "summary-item");
+            claim.append(
+              createElement("span", "summary-label", "Klaim yang ditelusuri"),
+              createElement("p", "summary-copy", data.reconstructed_claim),
+            );
+            grid.append(claim);
+          }
+          container.append(grid);
+          return title;
+        }
+
+        function renderStatePanel(kind, titleText, message, data, elapsedMs) {
+          resultsRegion.replaceChildren();
+          resultsRegion.hidden = false;
+          const panel = createElement("section", `state-panel ${kind}`);
+          panel.append(
+            createElement(
+              "span",
+              "state-kicker",
+              kind === "is-clarification" ? "Perlu klarifikasi" : "Hasil penelusuran",
+            ),
+          );
+          const title = createElement("h2", "", titleText);
+          title.tabIndex = -1;
+          panel.append(title, createElement("p", "state-message", message));
+          const metadata = createElement("div", "overview-meta");
+          addMetaChip(metadata, friendlyDomain(data?.domain));
+          addMetaChip(
+            metadata,
+            `Selesai dalam ${Number(data?.response_time_ms ?? elapsedMs).toFixed(0)} ms`,
+          );
+          panel.append(metadata);
+          resultsRegion.append(panel);
+          const providerErrors = renderProviderErrors(data?.provider_errors);
+          if (providerErrors) resultsRegion.append(providerErrors);
+          title.focus({ preventScroll: true });
+          resultsRegion.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+
+        function renderSuccess(data, elapsedMs) {
+          const evidence = Array.isArray(data.evidence) ? data.evidence : [];
+          const webResults = Array.isArray(data.web_results) ? data.web_results : [];
+          const contextualResults = webResults.filter((source) =>
+            ["ACADEMIC", "ENCYCLOPEDIC", "INSTITUTIONAL", "OFFICIAL_GOVERNMENT"].includes(
+              source?.source_class || source?.provenance,
+            ),
+          );
+          const broadResults = webResults.filter(
+            (source) => !contextualResults.includes(source),
+          );
+          if (data.status === "NEEDS_CLARIFICATION") {
+            renderStatePanel(
+              "is-clarification",
+              "Bantu kami memperjelas maksud Anda",
+              data.limited_clarification ||
+                "Pertanyaan ini masih dapat merujuk pada beberapa hal yang berbeda.",
+              data,
+              elapsedMs,
+            );
+            return;
+          }
+
+          if (
+            (data.status === "NO_RELIABLE_SOURCE_FOUND" || evidence.length === 0) &&
+            webResults.length === 0
+          ) {
+            renderStatePanel(
+              "is-empty",
+              "Belum dapat diverifikasi",
+              data.limited_clarification ||
+                (data.domain === "QURAN"
+                  ? "Sumber Qur’an belum dapat diakses saat ini."
+                  : "Sumber pernyataan ini belum diketahui atau belum dapat diverifikasi dari sumber yang berhasil ditelusuri. Belum ditemukan sumber yang memadai; coba tambahkan potongan kalimat atau konteks yang Anda ingat."),
+              data,
+              elapsedMs,
+            );
+            return;
+          }
+
+          resultsRegion.replaceChildren();
+          resultsRegion.hidden = false;
+
+          const overview = createElement("section", "result-overview");
+          const focusTarget = appendContextSummary(overview, data, elapsedMs);
+          resultsRegion.append(overview);
+
+          if (evidence.length > 0) {
+            const evidenceSection = createElement("section", "evidence-section");
+            const sectionHeading = createElement("div", "section-heading");
+            sectionHeading.append(
+              createElement("h2", "", "Sumber utama"),
+              createElement("p", "section-note", "Sumber terstruktur dengan peringkat tertinggi."),
+            );
+            evidenceSection.append(sectionHeading, renderEvidenceCard(evidence[0], 1, true));
+            resultsRegion.append(evidenceSection);
+          }
+
+          if (evidence.length > 1) {
+            const supporting = createElement("section", "evidence-section");
+            const supportingHeading = createElement("div", "section-heading");
+            supportingHeading.append(
+              createElement("h2", "", "Sumber pendukung"),
+              createElement("p", "section-note", "Kandidat terstruktur alternatif."),
+            );
+            supporting.append(supportingHeading);
+            const alternatives = createElement("details", "alternatives");
+            alternatives.append(
+              createElement(
+                "summary",
+                "",
+                `Lihat ${evidence.length - 1} kandidat alternatif`,
+              ),
+            );
+            const list = createElement("div", "alternatives-list");
+            evidence.slice(1).forEach((item, index) => {
+              list.append(renderEvidenceCard(item, index + 2, false));
+            });
+            alternatives.append(list);
+            supporting.append(alternatives);
+            resultsRegion.append(supporting);
+          }
+
+          function appendSourceSection(titleText, noteText, sources) {
+            if (sources.length === 0) return;
+            const section = createElement("section", "evidence-section");
+            const heading = createElement("div", "section-heading");
+            heading.append(
+              createElement("h2", "", titleText),
+              createElement("p", "section-note", noteText),
+            );
+            const list = createElement("div", "web-results-list");
+            sources.forEach((source, index) => {
+              list.append(renderWebSourceCard(source, index + 1));
+            });
+            section.append(heading, list);
+            resultsRegion.append(section);
+          }
+
+          appendSourceSection(
+            "Rujukan akademik dan ensiklopedis",
+            "Sumber sekunder untuk konteks sejarah dan kajian ilmiah.",
+            contextualResults,
+          );
+          appendSourceSection(
+            "Hasil penelusuran web",
+            "Halaman telah dibuka dan dicocokkan; hasil ini tetap ditandai sebagai penelusuran web.",
+            broadResults,
+          );
+
+          const providerErrors = renderProviderErrors(data.provider_errors);
+          if (providerErrors) resultsRegion.append(providerErrors);
+
+          if (data.expert_review_note) {
+            resultsRegion.append(createElement("p", "expert-note", data.expert_review_note));
+          }
+
+          focusTarget.focus({ preventScroll: true });
+          resultsRegion.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+
+        function renderRequestError(message) {
+          resultsRegion.replaceChildren();
+          resultsRegion.hidden = false;
+          const panel = createElement("section", "state-panel is-error");
+          panel.setAttribute("role", "alert");
+          panel.append(createElement("span", "state-kicker", "Permintaan gagal"));
+          const title = createElement("h2", "", "Penelusuran belum dapat diselesaikan");
+          title.tabIndex = -1;
+          panel.append(
+            title,
+            createElement(
+              "p",
+              "state-message",
+              message || "Terjadi kendala saat menghubungi backend. Silakan coba lagi.",
+            ),
+          );
+          const retry = createElement("button", "retry-button", "Coba lagi");
+          retry.type = "button";
+          retry.addEventListener("click", () => form.requestSubmit());
+          panel.append(retry);
+          resultsRegion.append(panel);
+          title.focus({ preventScroll: true });
+        }
+
+        async function submitSearch() {
+          const text = questionInput.value.trim();
+          if (!text) {
+            renderRequestError("Tuliskan pertanyaan, potongan hadis, atau ayat yang ingin ditelusuri.");
+            questionInput.focus();
+            return;
+          }
+
+          resultsRegion.hidden = true;
+          resultsRegion.replaceChildren();
+          setLoading(true);
+          const startedAt = performance.now();
+
+          try {
+            const response = await fetch("/v1/search", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ text }),
+            });
+            const contentType = response.headers.get("content-type") || "";
+            if (!response.ok || !contentType.includes("application/json")) {
+              throw new Error(`HTTP ${response.status}`);
+            }
+            const data = await response.json();
+            const elapsedMs = performance.now() - startedAt;
+            setLoading(false);
+            renderSuccess(data, elapsedMs);
+          } catch (_error) {
+            setLoading(false);
+            renderRequestError(
+              "Backend atau provider belum merespons dengan baik. Pertanyaan Anda tetap tersimpan; silakan coba lagi.",
+            );
+          }
+        }
+
+        form.addEventListener("submit", (event) => {
+          event.preventDefault();
+          submitSearch();
+        });
+      })();
+    </script>
+  </body>
+</html>

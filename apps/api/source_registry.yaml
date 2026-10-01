@@ -1,0 +1,68 @@
+version: '1.0'
+providers:
+- provider_id: quran_foundation
+  provider_name: Quran Foundation
+  domains:
+  - quran.com
+  - www.quran.com
+  - apis.quran.foundation
+  - apis-prelive.quran.foundation
+  source_class: CANONICAL_CURATED
+  trust_tier: 1
+  evidence_role: PRIMARY_CURATED
+  primary_domain: QURAN
+  access_method: OFFICIAL_API
+  requires_key_or_credentials: true
+  enabled_initially: true
+  notes: Adapter is enabled with graceful-unavailable behavior. OAuth client credentials,
+    access tokens, and Content/Search calls remain server-side; runtime retrieval starts
+    only after developer access is configured.
+- provider_id: sunnah
+  provider_name: Sunnah.com
+  domains:
+  - sunnah.com
+  - beta.sunnah.com
+  source_class: CANONICAL_CURATED
+  primary_domain: HADITH
+  access_method: API_PREFERRED
+  requires_key_or_credentials: true
+  enabled_initially: false
+  notes: API coverage is partial. Do not scrape prohibited content. Enable after API
+    key is obtained.
+- provider_id: hadithapi
+  provider_name: HadithAPI
+  domains:
+  - hadithapi.com
+  - www.hadithapi.com
+  source_class: CURATED_SECONDARY
+  trust_tier: 2
+  evidence_role: CURATED_SECONDARY
+  primary_domain: HADITH
+  access_method: OFFICIAL_PROVIDER_API
+  requires_key_or_credentials: true
+  enabled_initially: true
+  notes: Temporary structured hadith search provider. Provider-returned metadata may
+    be VERIFIED_PROVIDER, but it is never Tier-1 or VERIFIED_DIRECT without separate
+    Sunnah.com Official API validation. No undocumented item URL may be constructed.
+- provider_id: openalex
+  provider_name: OpenAlex
+  domains:
+  - openalex.org
+  - api.openalex.org
+  source_class: ACADEMIC_DISCOVERY
+  primary_domain: ACADEMIC
+  access_method: PUBLIC_API
+  requires_key_or_credentials: false
+  enabled_initially: true
+  notes: Useful for literature discovery; does not itself establish religious authority.
+- provider_id: crossref
+  provider_name: Crossref
+  domains:
+  - crossref.org
+  - api.crossref.org
+  source_class: ACADEMIC_METADATA
+  primary_domain: ACADEMIC
+  access_method: PUBLIC_API
+  requires_key_or_credentials: false
+  enabled_initially: true
+  notes: Use for DOI and bibliographic metadata validation/discovery.

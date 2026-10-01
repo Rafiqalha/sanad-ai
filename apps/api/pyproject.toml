@@ -1,0 +1,9 @@
+[project]
+name = "sanad-ai-core"
+version = "0.1.0"
+description = "Intent-preserving Islamic source provenance retrieval proof-of-concept"
+requires-python = ">=3.11"
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+pythonpath = ["."]

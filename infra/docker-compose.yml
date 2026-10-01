@@ -1,0 +1,15 @@
+services:
+  api:
+    build:
+      context: ../apps/api
+    ports:
+      - "8000:8000"
+    env_file:
+      - ../apps/api/.env
+  web:
+    build:
+      context: ../apps/web
+    ports:
+      - "3000:3000"
+    environment:
+      - SANAD_API_URL=http://api:8000

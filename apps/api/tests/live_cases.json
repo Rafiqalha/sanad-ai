@@ -1,0 +1,37 @@
+[
+  {
+    "id": "HAD-001",
+    "input": "Katanya kalau orang mencari ilmu dimudahkan jalan menuju surga, hadisnya dari mana?",
+    "expected_domain": "HADITH",
+    "should_clarify": false,
+    "notes": "Primary Phase 1A live test; gold source mapping must be manually verified before scoring."
+  },
+  {
+    "id": "HAD-002",
+    "input": "Ada hadis tentang amal itu tergantung niat, sumber aslinya apa?",
+    "expected_domain": "HADITH",
+    "should_clarify": false,
+    "notes": "Near-exact semantic memory."
+  },
+  {
+    "id": "HAD-003",
+    "input": "Hadis yang bilang orang kuat itu bukan yang jago bergulat, itu dari mana?",
+    "expected_domain": "HADITH",
+    "should_clarify": false,
+    "notes": "Paraphrase."
+  },
+  {
+    "id": "AMB-001",
+    "input": "Ada dalil tentang jalan itu?",
+    "expected_domain": "UNKNOWN",
+    "should_clarify": true,
+    "notes": "Must stop and clarify."
+  },
+  {
+    "id": "AMB-002",
+    "input": "Hadis tentang hati apa ya?",
+    "expected_domain": "HADITH",
+    "should_clarify": true,
+    "notes": "Domain may be known but meaning remains materially ambiguous."
+  }
+]
