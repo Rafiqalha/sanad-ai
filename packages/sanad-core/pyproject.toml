@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sanad-ai-core"
+version = "0.1.0"
+description = "Intent-preserving Islamic source provenance retrieval library"
+requires-python = ">=3.11"
+dependencies = [
+    "httpx>=0.27,<1",
+    "pydantic>=2.8,<3",
+    "pydantic-settings>=2.4,<3",
+    "python-dotenv>=1.0,<2",
+    "rapidfuzz>=3.9,<4",
+]
+
+[project.optional-dependencies]
+# Optional local semantic reranker (sanad_core.reranker). Off by default;
+# enable with SANAD_ENABLE_SEMANTIC_RERANK=true.
+ml = [
+    "sentence-transformers>=3,<6",
+    "torch>=2.2",
+]
+
+[tool.setuptools.packages.find]
+include = ["sanad_core*"]

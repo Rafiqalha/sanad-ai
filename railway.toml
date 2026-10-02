@@ -1,0 +1,12 @@
+# Lives at the repository root because the API image needs to build from the
+# whole workspace: apps/api depends on the sanad-core library in packages/.
+# The Railway service's root directory must therefore be the repository root.
+[build]
+builder = "DOCKERFILE"
+dockerfilePath = "apps/api/Dockerfile"
+
+[deploy]
+healthcheckPath = "/health"
+healthcheckTimeout = 120
+restartPolicyType = "ON_FAILURE"
+restartPolicyMaxRetries = 3

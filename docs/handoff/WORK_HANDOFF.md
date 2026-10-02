@@ -28,7 +28,7 @@ Upload seluruh folder/repository, terutama:
 - `requirements.txt`
 - `requirements-ml.txt`
 - `pyproject.toml`
-- seluruh folder `sanad_core/`
+- seluruh folder `sanad_core/` (kini di `packages/sanad-core/sanad_core/`)
 - seluruh folder `tests/`
 - `BUILD_CHECK.md`
 

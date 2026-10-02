@@ -5,14 +5,17 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 from pydantic import BaseModel
 
-from .config import settings
-from .history_pipeline import IslamicHistoryPipeline
-from .orchestrator import SanadOrchestrator
-from .providers.broad_web import BroadWebDiscoveryProvider, WebPageRetriever
-from .providers.crossref import CrossrefProvider
-from .providers.mediawiki import MediaWikiProvider
-from .providers.openalex import OpenAlexProvider
-from .web_retrieval import WebDiscoveryPipeline
+from sanad_core.config import settings
+from sanad_core.history_pipeline import IslamicHistoryPipeline
+from sanad_core.orchestrator import SanadOrchestrator
+from sanad_core.providers.broad_web import (
+    BroadWebDiscoveryProvider,
+    WebPageRetriever,
+)
+from sanad_core.providers.crossref import CrossrefProvider
+from sanad_core.providers.mediawiki import MediaWikiProvider
+from sanad_core.providers.openalex import OpenAlexProvider
+from sanad_core.web_retrieval import WebDiscoveryPipeline
 
 
 app = FastAPI(
@@ -71,7 +74,9 @@ orchestrator = SanadOrchestrator(
     web_retrieval=_web_retrieval,
     history_retrieval=_history_retrieval,
 )
-WEB_ROOT = Path(__file__).resolve().parent / "web"
+# The UI lives beside the app package (apps/api/web), not inside it. Kept
+# absolute on purpose: tests chdir elsewhere and must still be served.
+WEB_ROOT = Path(__file__).resolve().parent.parent / "web"
 
 
 class SearchRequest(BaseModel):

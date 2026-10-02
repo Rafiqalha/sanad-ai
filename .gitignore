@@ -9,11 +9,13 @@
 __pycache__/
 .pytest_cache/
 *.pyc
+*.egg-info/
 
 # node
 node_modules/
 .next/
 dist/
+.turbo/
 
 # os / handoff junk
 .DS_Store

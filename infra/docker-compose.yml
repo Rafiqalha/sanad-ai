@@ -1,15 +1,24 @@
 services:
   api:
     build:
-      context: ../apps/api
+      # Context is the repository root: the service depends on the sanad-core
+      # library, which lives outside apps/api.
+      context: ..
+      dockerfile: apps/api/Dockerfile
     ports:
       - "8000:8000"
     env_file:
-      - ../apps/api/.env
+      # Optional so a fresh clone can start without a populated .env.
+      - path: ../apps/api/.env
+        required: false
+
   web:
     build:
-      context: ../apps/web
+      context: ..
+      dockerfile: apps/web/Dockerfile
     ports:
       - "3000:3000"
     environment:
       - SANAD_API_URL=http://api:8000
+    depends_on:
+      - api

@@ -1,9 +1,13 @@
 [project]
-name = "sanad-ai-core"
+name = "sanad-ai-api"
 version = "0.1.0"
-description = "Intent-preserving Islamic source provenance retrieval proof-of-concept"
+description = "HTTP service and retrieval entry points for SANAD.AI"
 requires-python = ">=3.11"
 
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
-pythonpath = ["."]
+# "." covers the scripts/ namespace package (tests import
+# `scripts.live_smoke_test`); the sanad-core entry resolves the library from
+# source so the suite runs without installing anything. Paths are relative to
+# this file, which sits two levels below the repo root.
+pythonpath = ["../../packages/sanad-core", "."]

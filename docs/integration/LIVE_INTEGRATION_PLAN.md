@@ -38,7 +38,7 @@ Never commit `.env`.
 Run:
 
 ```bash
-python -m compileall sanad_core
+python -m compileall -q app ../../packages/sanad-core/sanad_core
 pytest -q
 python scripts/check_setup.py
 ```

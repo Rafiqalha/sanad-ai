@@ -203,12 +203,12 @@ Required modules:
 - `intent.py`
 - `query_generator.py`
 - `source_registry.py`
-- `router.py`
+- `semantic_router.py`
 - `providers/sunnah.py`
 - `providers/hadithapi.py`
 - `retrieval.py`
 - `reranker.py`
-- `source_validator.py`
+- `source_link_resolver.py`
 - `link_validator.py`
 - `evidence.py`
 - `main.py`

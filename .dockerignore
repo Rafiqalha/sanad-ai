@@ -1,0 +1,28 @@
+# Applies to every image build. Build contexts are the repository root (see
+# infra/docker-compose.yml), so these patterns are repo-root relative.
+
+# Git and editor noise
+.git/
+.gitignore
+**/.DS_Store
+
+# Python
+**/.venv/
+**/__pycache__/
+**/*.pyc
+**/.pytest_cache/
+**/*.egg-info/
+
+# Secrets — never ship a real .env into an image
+**/.env
+
+# Node
+**/node_modules/
+**/.next/
+**/next-env.d.ts
+
+# Not needed by either image
+docs/
+infra/
+runtime/
+CLAUDE.md

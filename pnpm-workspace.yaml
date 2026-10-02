@@ -1,3 +1,9 @@
 packages:
   - "apps/*"
   - "packages/*"
+
+# pnpm blocks dependency build scripts by default and fails the install when any
+# are unreviewed. unrs-resolver is a transitive dependency of the Next.js ESLint
+# config and needs its install script to fetch native bindings.
+allowBuilds:
+  unrs-resolver: true

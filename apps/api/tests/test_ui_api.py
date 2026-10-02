@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from fastapi.testclient import TestClient
 
-import sanad_core.api as api_module
+import app.main as api_module
 from sanad_core.intent import IntentEngine
 from sanad_core.query_generator import QueryGenerator
 

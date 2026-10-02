@@ -1,0 +1,11 @@
+{
+  "name": "@sanad/api",
+  "version": "0.1.0",
+  "private": true,
+  "description": "FastAPI service and retrieval entry points for SANAD.AI",
+  "scripts": {
+    "dev": "python -m uvicorn app.main:app --host 127.0.0.1 --port 8000",
+    "test": "python -m pytest -q",
+    "lint": "python -m compileall -q app scripts tests"
+  }
+}

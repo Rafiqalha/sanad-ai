@@ -14,7 +14,8 @@ WORK_HANDOFF.md
 BUILD_CHECK.md
 README.md
 
-Then inspect the full sanad_core/, tests/, scripts/, and source_registry.yaml.
+Then inspect the full sanad_core/ (now packages/sanad-core/sanad_core/), tests/,
+scripts/, and source_registry.yaml.
 
 Non-negotiable rules:
 - SANAD.AI is a source-provenance and retrieval system, not an autonomous religious authority.

@@ -24,7 +24,8 @@ This package is intended to be the single handoff artifact.
 10. `README.md`
 
 Then inspect:
-- `sanad_core/`
+
+- `sanad_core/` (kini `packages/sanad-core/sanad_core/`)
 - `tests/`
 - `scripts/`
 - `source_registry.yaml`
