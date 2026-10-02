@@ -9,9 +9,10 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 
 WORKDIR /srv
 
-# Requirements resolve `-e ../../packages/sanad-core` relative to their own
-# location, so the library must be in place before pip runs. Copying the
-# manifests first keeps dependency installs cached across code changes.
+# requirements.txt points at packages/sanad-core with a path relative to the
+# working directory, so WORKDIR must stay at the workspace root and the library
+# must be copied before pip runs. Copying both manifests first keeps the
+# dependency install cached across code changes.
 COPY packages/sanad-core ./packages/sanad-core
 COPY apps/api/requirements.txt ./apps/api/requirements.txt
 RUN pip install --no-cache-dir -r apps/api/requirements.txt

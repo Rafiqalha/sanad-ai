@@ -1,2 +1,3 @@
 # Optional local semantic reranker; pulls the sanad-core "ml" extra.
--e ../../packages/sanad-core[ml]
+# Run from the repository root, like requirements.txt.
+-e packages/sanad-core[ml]

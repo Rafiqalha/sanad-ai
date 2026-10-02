@@ -34,7 +34,9 @@ at `GET /`. `apps/web` is still `create-next-app` scaffolding.
 Requires Python 3.11+ and Node 24+ (for the workspace tooling).
 
 ```bash
-# 1. Install the retrieval library and service dependencies
+# 1. Install the retrieval library and service dependencies.
+#    Run this from the repository root: pip resolves the library path in
+#    requirements.txt against the working directory, not the file.
 pip install -r apps/api/requirements.txt
 
 # 2. Configure credentials (all optional — see below)

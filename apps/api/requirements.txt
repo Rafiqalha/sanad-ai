@@ -1,7 +1,9 @@
 # The retrieval library (schemas, providers, ranking, evidence, orchestration)
 # lives in packages/sanad-core and declares its own dependencies there.
-# Paths resolve relative to this file, which sits two levels below the repo root.
--e ../../packages/sanad-core
+# pip resolves relative paths against the CURRENT WORKING DIRECTORY, not this
+# file, so run this from the repository root:
+#     pip install -r apps/api/requirements.txt
+-e packages/sanad-core
 
 # Service layer
 fastapi>=0.115,<1
